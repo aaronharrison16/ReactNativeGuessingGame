@@ -1,5 +1,5 @@
 import React from 'react'
-import { ScrollView, View, StyleSheet, Image, Text, Dimensions } from 'react-native'
+import { ScrollView, View, StyleSheet, Image, Text, Dimensions, SafeAreaView } from 'react-native'
 
 import BodyText from '../components/BodyText'
 import ApplicationStyles from '../constants/ApplicationStyles'
