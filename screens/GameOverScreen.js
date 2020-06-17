@@ -1,40 +1,64 @@
 import React from 'react'
-import { View, StyleSheet, Button, Image } from 'react-native'
+import { ScrollView, View, StyleSheet, Image, Text, Dimensions } from 'react-native'
 
 import BodyText from '../components/BodyText'
 import ApplicationStyles from '../constants/ApplicationStyles'
 import TitleText from '../components/TitleText'
+import Colors from '../constants/colors'
+import MainButton from '../components/MainButton'
 
 const GameOverScreen = props => {
   return (
-    <View style={ApplicationStyles.screen}>
-      <TitleText>The game is over</TitleText>
-      <View style={styles.imageContainer}>
-        <Image
-          style={styles.image}
-          source={require('../assets/success.png')}
-        />
+    <ScrollView>
+      <View style={[ApplicationStyles.screen, styles.gameOverScreen]}>
+        <TitleText>The game is over</TitleText>
+        <View style={styles.imageContainer}>
+          <Image
+            style={styles.image}
+            source={require('../assets/success.png')}
+          />
+        </View>
+        <View style={styles.resultContainer}>
+          <BodyText style={styles.resultText}>
+            Your phone needed <Text style={styles.highlight}>{props.roundsNumber}</Text> rounds to guess the number <Text style={styles.highlight}>{props.userNumber}</Text>
+          </BodyText>
+        </View>
+        <MainButton onPress={props.onRestart} >
+          NEW GAME
+        </MainButton>
       </View>
-      <BodyText>Number of rounds: {props.roundsNumber}</BodyText>
-      <BodyText>Number was: {props.userNumber}</BodyText>
-      <Button title='NEW GAME' onPress={props.onRestart} />
-    </View>
+    </ScrollView>
   )
 }
 
 const styles = StyleSheet.create({
+  gameOverScreen: {
+    justifyContent: 'center'
+  },
   imageContainer: {
-    width: 300,
-    height: 300,
-    borderRadius: 150,
+    width: Dimensions.get('window').width * 0.7,
+    height: Dimensions.get('window').width * 0.7,
+    borderRadius: Dimensions.get('window').width * 0.7 / 2,
     borderWidth: 3,
     borderColor: 'black',
     overflow: 'hidden',
-    marginVertical: 30
+    marginVertical: Dimensions.get('window').height / 20
   },
   image: {
     width: '100%',
     height: '100%',
+  },
+  highlight: {
+    color: Colors.primary,
+    fontFamily: 'open-sans-bold'
+  },
+  resultContainer: {
+    marginHorizontal: 20,
+    marginVertical: Dimensions.get('window').height / 60
+  },
+  resultText: {
+    textAlign: 'center',
+    fontSize: Dimensions.get('window').height < 400 ? 16 : 20 
   }
 })
 
